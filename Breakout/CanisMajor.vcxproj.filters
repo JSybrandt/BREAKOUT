@@ -10,9 +10,6 @@
     <ClInclude Include="Camera.h">
       <Filter>HEADERS</Filter>
     </ClInclude>
-    <ClInclude Include="CanisMajor.h">
-      <Filter>HEADERS</Filter>
-    </ClInclude>
     <ClInclude Include="constants.h">
       <Filter>HEADERS</Filter>
     </ClInclude>
@@ -61,6 +58,15 @@
     <ClInclude Include="Vertex.h">
       <Filter>HEADERS</Filter>
     </ClInclude>
+    <ClInclude Include="Paddle.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="BREAKOUT.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -70,9 +76,6 @@
       <Filter>SOURCE</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>SOURCE</Filter>
-    </ClCompile>
-    <ClCompile Include="CanisMajor.cpp">
       <Filter>SOURCE</Filter>
     </ClCompile>
     <ClCompile Include="d3dApp.cpp">
@@ -97,6 +100,15 @@
       <Filter>SOURCE</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Paddle.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="BREAKOUT.cpp">
       <Filter>SOURCE</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "CanisMajor.h"
+#include "BREAKOUT.h"
 
 using namespace CameraNS;
 
@@ -13,7 +13,7 @@ Camera::Camera()
 	farClippingPlane = FAR_CLIPPING_DIST;
 	up = Vector3(0.0f, 1.0f, 0.0f);
 	position = Vector3(0,0,0);
-	direction = Vector3(0.0f, 0.0f, 0.0f);
+
 }
 
 Camera::~Camera()
@@ -21,13 +21,18 @@ Camera::~Camera()
 	
 }
 
-
+void Camera::setPerspective()
+{
+	aspectRatio = (float)game->mClientWidth/game->mClientHeight;
+	D3DXMatrixPerspectiveFovLH(&mProj, FoV, aspectRatio, nearClippingPlane,farClippingPlane); 
+}
 
 
 
 void Camera::update(float dt)
 {
-	Vector3 forward = direction;
+	setPerspective();
+	Vector3 forward = position - lookAt;
 	forward.y=0;
 
 	Vector3 right;
@@ -36,10 +41,6 @@ void Camera::update(float dt)
 
 	Normalize(&right,&right);
 	Normalize(&forward,&forward);
-
-	Normalize(&direction,&direction);
-
-	Vector3 lookAt = position + direction;
 
 	//game->audio->updateCamera(getPosition(),getDirection(),up,Vector3(0,0,0));
 	

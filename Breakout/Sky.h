@@ -5,7 +5,7 @@
 #include "constants.h"
 #include <vector>
 
-class CanisMajor;
+class BREAKOUT;
 
 class Sky
 {
@@ -13,7 +13,7 @@ public:
 	Sky();
 	~Sky();
 
-	void init(ID3D10Device* device, CanisMajor* g, float radius);
+	void init(ID3D10Device* device, BREAKOUT* g, float radius);
 
 	void draw(Matrix& camera, Matrix& projection);
 
@@ -22,7 +22,7 @@ private:
 	Sky& operator=(const Sky& rhs);
 	void Subdivide(std::vector<D3DXVECTOR3>& vertices, std::vector<DWORD>& indices);
 	void BuildGeoSphere(UINT numSubdivisions, float radius, std::vector<D3DXVECTOR3>& vertices, std::vector<DWORD>& indices);
-	CanisMajor* game;
+	BREAKOUT* game;
 
 private:
 	ID3D10Device* md3dDevice;

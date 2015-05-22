@@ -9,7 +9,7 @@
 #include "constants.h"
 #include "audio.h"
 
-class CanisMajor;
+class BREAKOUT;
 
 static int foo[1];
 
@@ -38,7 +38,7 @@ protected:
 	//consider 100 health to be the "standard"
 	float MAX_HEALTH;
 	//bool targeted; 
-	CanisMajor* game;
+	BREAKOUT* game;
 	Vector3 scale;
 
 public:
@@ -46,7 +46,7 @@ public:
 	Actor();
 	~Actor();
 
-	void init(CanisMajor* game,Geometry *b, float r=1,  Vector3 scale = Vector3(1,1,1));
+	void init(BREAKOUT* game,Geometry *b, float r=1,  Vector3 scale = Vector3(1,1,1));
 	virtual void draw(ID3D10EffectMatrixVariable* fx, Matrix& camera, Matrix& projection, ID3D10EffectTechnique* mTech);
 	virtual void update(float dt);
 

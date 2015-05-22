@@ -1,2 +1,0 @@
-book2.geo: Made by Aare at http://opengameart.org/content/old-book
-book3.geo & book4.geo: Made by Dim at http://opengameart.org/content/dims-arboretum

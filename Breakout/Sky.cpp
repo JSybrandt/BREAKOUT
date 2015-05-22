@@ -1,7 +1,7 @@
 #include "Sky.h"
 #include "Camera.h"
 //#include "Effects.h"
-#include "CanisMajor.h"
+#include "BREAKOUT.h"
 
 typedef std::vector<D3DXVECTOR3> VertexList;
 typedef std::vector<DWORD> IndexList;
@@ -24,7 +24,7 @@ Sky::~Sky()
 	ReleaseCOM(mIB);
 }
 
-void Sky::init(ID3D10Device* device, CanisMajor* g, float radius)
+void Sky::init(ID3D10Device* device, BREAKOUT* g, float radius)
 {
 	md3dDevice = device;
 
