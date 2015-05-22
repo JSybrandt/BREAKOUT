@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Actor.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="CanisMajor.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dApp.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dUtil.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="gameError.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimer.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="mathUtil.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="sharedDefines.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Sky.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Actor.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="CanisMajor.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="d3dApp.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimer.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="mathUtil.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Sky.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="HEADERS">
+      <UniqueIdentifier>{68d1a839-3647-4d52-b142-a3b1d940b405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SOURCE">
+      <UniqueIdentifier>{220598a8-c5a3-4111-afdc-bf9e139f8bd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FX">
+      <UniqueIdentifier>{102cebee-985b-4aa1-a326-15ae9c74a0ed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI.fx">
+      <Filter>FX</Filter>
+    </None>
+    <None Include="lighthelper.fx">
+      <Filter>FX</Filter>
+    </None>
+    <None Include="lighting.fx">
+      <Filter>FX</Filter>
+    </None>
+    <None Include="sky.fx">
+      <Filter>FX</Filter>
+    </None>
+    <None Include="sprite.fx">
+      <Filter>FX</Filter>
+    </None>
+  </ItemGroup>
+</Project>
