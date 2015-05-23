@@ -142,7 +142,7 @@ private:
 	HANDLE loadingThread;
 	bool threadComplete;
 
-	Geometry mCube, mSphere;
+	Geometry mCubeBlue,mCubeGreen,mCubeOrange,mCubePurple,mCubeYellow,mCubeRock,mCubeWhite, mSphere;
 	Block blocks[BRK::NUM_BLOCKS];
 	Actor walls[BRK::NUM_WALLS];
 	Powerup powerUps[BRK::NUM_POWER_UPS]; 

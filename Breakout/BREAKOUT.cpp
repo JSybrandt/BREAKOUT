@@ -75,29 +75,36 @@ void BREAKOUT::threadInit()
 
 	sky.init(md3dDevice, this, 5000.0f);
 
-	mCube.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\temp.png",true);
+	mCubeBlue.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\blue.png",true,L".\\textures\\white.png");
+	mCubeGreen.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\green.png",true,L".\\textures\\white.png");
+	mCubeOrange.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\orange.png",true,L".\\textures\\white.png");
+	mCubePurple.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\purple.png",true,L".\\textures\\white.png");
+	mCubeYellow.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\yellow.png",true,L".\\textures\\white.png");
+	mCubeRock.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\rock.png",true);
+	mCubeWhite.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\white.png",true,L".\\textures\\white.png");
 
+	Geometry* b[] = {&mCubeBlue,&mCubeGreen,&mCubeOrange,&mCubePurple,&mCubeYellow};
 	for(int i=0; i<BRK::NUM_BLOCKS;i++)
 	{
-		blocks[i].init(this,&mCube);
+		blocks[i].init(this,b[i/15]);
 		blocks[i].collisionType = AABBox;
 	}
 	for(int i = 0 ; i < BRK::NUM_WALLS; i++)
 	{
-		walls[i].init(this,&mCube);
+		walls[i].init(this,&mCubeRock);
 		walls[i].collisionType = AABBox;
 	}
 
 	for(int i = 0; i < BRK::NUM_POWER_UPS; i++)
 	{
-		powerUps[i].init(this,&mSphere);
+		powerUps[i].init(this,&mSphere,1,Vector3(1,0.5,0.5));
 	}
 
-	paddle.init(this,&mCube,1,PaddleNS::PADDLE_SCALE);
+	paddle.init(this,&mCubeWhite,1,PaddleNS::PADDLE_SCALE);
 	paddle.collisionType = AABBox;
 	paddle.setPosition(BRK::PADDLE_START_POS);
 
-	mSphere.init(md3dDevice,".\\geometry\\sphere.geo",L".\\textures\\temp.png",true);
+	mSphere.init(md3dDevice,".\\geometry\\sphere.geo",L".\\textures\\white.png",true,L".\\textures\\white.png");
 	for(int i=0;i<BRK::NUM_BALLS;i++)
 		balls[i].init(this,&mSphere,0.5);
 	
@@ -481,6 +488,7 @@ void BREAKOUT::clearLevel()
 	paddle.isActive = false;
 	for(int i=0;i<BRK::NUM_BALLS;i++)
 		balls[i].isActive = false;
+	flipCooldown = 0;
 }
 
 void BREAKOUT::loadSplashScreen(bool status)
@@ -622,6 +630,7 @@ Powerup* BREAKOUT::spawnPowerUp(Vector3 pos, PowerUpType t)
 		if(!powerUps[i].isActive)
 		{
 			powerUps[i].create(pos,t);
+			powerUps[i].setScale(Vector3(1,0.5,0.5));
 			return &powerUps[i];
 		}
 	}

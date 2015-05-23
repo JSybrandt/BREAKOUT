@@ -22,4 +22,5 @@ public:
 	void update(float dt);
 	void create(Vector3 pos, PowerUpType t);
 
+	void drop();
 };

@@ -15,5 +15,5 @@ public:
 	void isHit();
 
 private:
-	PowerUpType pow; 
+	Powerup* pow; 
 };

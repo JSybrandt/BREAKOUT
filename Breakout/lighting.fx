@@ -136,13 +136,27 @@ float4 PS(VS_OUT pIn) : SV_Target
 
 	float4 retval = float4(litColor, diffuse.a);
 	retval = saturate(retval);
+
 	return retval;
 }
+
+BlendState SrcAlphaBlendingAdd
+{
+    BlendEnable[0] = TRUE;
+    SrcBlend = SRC_ALPHA;
+    DestBlend = INV_SRC_ALPHA;
+    BlendOp = ADD;
+    SrcBlendAlpha = ZERO;
+    DestBlendAlpha = ZERO;
+    BlendOpAlpha = ADD;
+    RenderTargetWriteMask[0] = 0x0F;
+};
 
 technique10 LightTech
 {
 	pass P0
 	{
+		SetBlendState( SrcAlphaBlendingAdd, float4( 0.0f, 0.0f, 0.0f, 0.0f ), 0xFFFFFFFF );
 		SetVertexShader( CompileShader( vs_4_0, VS() ) );
 		SetGeometryShader( NULL );
 		SetPixelShader( CompileShader( ps_4_0, PS() ) );

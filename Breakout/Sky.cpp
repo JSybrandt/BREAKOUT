@@ -29,7 +29,7 @@ void Sky::init(ID3D10Device* device, BREAKOUT* g, float radius)
 	md3dDevice = device;
 
 	HR(D3DX10CreateShaderResourceViewFromFile(device, 
-		L".\\textures\\skybox.dds", 0, 0, &mCubeMap, 0 ));
+		L".\\textures\\BackgroundCube.dds", 0, 0, &mCubeMap, 0 ));
 
 	game = g;
 
