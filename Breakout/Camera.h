@@ -35,6 +35,7 @@ public:
 	void setPosition(Vector3 pos) {position = pos;}
 	Vector3 getPosition() {return position;}
 	void setLookAt(Vector3 l){lookAt = l;}
+	Vector3 getLookAt(){return lookAt;}
 	float getSpeed () {return speed;}
 	void setSpeed(float s) {speed = s;}
 	float getFoV() {return FoV;}

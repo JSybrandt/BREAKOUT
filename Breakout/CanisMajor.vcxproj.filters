@@ -67,6 +67,12 @@
     <ClInclude Include="BREAKOUT.h">
       <Filter>HEADERS</Filter>
     </ClInclude>
+    <ClInclude Include="Powerup.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>HEADERS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -109,6 +115,12 @@
       <Filter>SOURCE</Filter>
     </ClCompile>
     <ClCompile Include="BREAKOUT.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>SOURCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Powerup.cpp">
       <Filter>SOURCE</Filter>
     </ClCompile>
   </ItemGroup>

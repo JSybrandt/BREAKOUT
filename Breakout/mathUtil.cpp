@@ -37,3 +37,8 @@ Vector3 rotate(Vector3 p, Vector3 r)
 int random(int num) {
 	return rand()%num+1;
 }
+
+float rand01()
+{
+	return (rand()%100)/100.0;
+}

@@ -14,6 +14,7 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="audio.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Block.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="BREAKOUT.h" />
     <ClInclude Include="constants.h" />
@@ -29,6 +30,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="mathUtil.h" />
     <ClInclude Include="Paddle.h" />
+    <ClInclude Include="Powerup.h" />
     <ClInclude Include="sharedDefines.h" />
     <ClInclude Include="Sky.h" />
     <ClInclude Include="Sprite.h" />
@@ -38,6 +40,7 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BREAKOUT.cpp" />
     <ClCompile Include="d3dApp.cpp" />
@@ -47,6 +50,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="mathUtil.cpp" />
     <ClCompile Include="Paddle.cpp" />
+    <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
