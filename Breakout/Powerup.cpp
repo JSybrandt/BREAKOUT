@@ -15,9 +15,11 @@ void Powerup::create(Vector3 pos, PowerUpType t)
 	Actor::create(pos);
 	setVelocity(Vector3(0,0,0));
 	type=t;
+	setScale(Vector3(1,1,1));
 }
 
 void Powerup::drop()
 {
 	setVelocity(PowerUpNS::VELOCITY);
+	setScale(Vector3(2,2,2));
 }

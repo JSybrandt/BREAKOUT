@@ -24,7 +24,17 @@ void Geometry::init(ID3D10Device* device, D3DXCOLOR color, D3D_PRIMITIVE_TOPOLOG
 	topology = top;
 }
 
-void Geometry::init(ID3D10Device* device, std::string objFile, LPCWSTR texFile, bool comp, LPCWSTR specFile)
+void Geometry::init(ID3D10Device* device, std::string objFile, LPCWSTR texFile, LPCWSTR specFile)
+{
+	//LOAD TEXTURES
+	HR(D3DX10CreateShaderResourceViewFromFile(device, 
+		texFile, 0, 0, &mDiffuseMapRV, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(device, 
+		specFile, 0, 0, &mSpecMapRV, 0 ));
+	init(device,objFile,mDiffuseMapRV,mSpecMapRV);
+}
+
+void Geometry::init(ID3D10Device* device, std::string objFile, TEXTURE* tex, TEXTURE* spec)
 {
 	md3dDevice = device;
 	initRasterState();
@@ -36,6 +46,8 @@ void Geometry::init(ID3D10Device* device, std::string objFile, LPCWSTR texFile, 
 
 	if(!fin) throw "THERE WASNT A FILE THERE";
 
+	mDiffuseMapRV = tex;
+	mSpecMapRV = spec;
 
 	vector<Vector3> vertices, faces, normals, combos;
 	vector<Vector2> textures;
@@ -90,16 +102,9 @@ void Geometry::init(ID3D10Device* device, std::string objFile, LPCWSTR texFile, 
 			token = strtok(NULL,"/ ");//first face value index
 			tx = atoi(token);
 
-			if(comp) {
-				token = strtok(NULL,"/ ");//first texture value index
-				texX = atoi(token);
-				token = strtok(NULL,"/ ");//first normal index				
-			}
-			else {
-				texX = 1;
-				token = strtok(NULL,"// ");//first normal index
-			}
-
+			token = strtok(NULL,"/ ");//first texture value index
+			texX = atoi(token);
+			token = strtok(NULL,"/ ");//first normal index		
 			nx = atoi(token);	
 
 			//Check if the Vertex already exists
@@ -118,15 +123,9 @@ void Geometry::init(ID3D10Device* device, std::string objFile, LPCWSTR texFile, 
 			foundInd = false;
 			token = strtok(NULL,"/ ");//second face value index
 			ty = atoi(token);
-			if(comp) {
-				token = strtok(NULL,"/ ");//second texture value index
-				texY = atoi(token);
-				token = strtok(NULL,"/ ");//second normal index				
-			}
-			else {
-				texY = 1;
-				token = strtok(NULL,"// ");//second normal index
-			}
+			token = strtok(NULL,"/ ");//second texture value index
+			texY = atoi(token);
+			token = strtok(NULL,"/ ");//second normal index		
 			ny = atoi(token);
 
 			//Check if the Vertex already exists
@@ -145,15 +144,9 @@ void Geometry::init(ID3D10Device* device, std::string objFile, LPCWSTR texFile, 
 			foundInd = false;
 			token = strtok(NULL,"/ ");//third face value index
 			tz = atoi(token);
-			if(comp) {
-				token = strtok(NULL,"/ ");//second texture value index
-				texZ = atoi(token);
-				token = strtok(NULL,"/ ");//second normal index				
-			}
-			else {
-				texZ = 1;
-				token = strtok(NULL,"// ");//second normal index
-			}
+			token = strtok(NULL,"/ ");//second texture value index
+			texZ = atoi(token);
+			token = strtok(NULL,"/ ");//second normal index		
 			nz = atoi(token);
 
 			//Check if the Vertex already exists
@@ -205,11 +198,7 @@ void Geometry::init(ID3D10Device* device, std::string objFile, LPCWSTR texFile, 
 		initIndexBuffer(indices);
 	}
 
-	//LOAD TEXTURES
-	HR(D3DX10CreateShaderResourceViewFromFile(device, 
-		texFile, 0, 0, &mDiffuseMapRV, 0 ));
-	HR(D3DX10CreateShaderResourceViewFromFile(device, 
-		specFile, 0, 0, &mSpecMapRV, 0 ));
+	
 
 	calculateDefaultAABB(vertices);
 }

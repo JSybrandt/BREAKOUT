@@ -20,13 +20,16 @@ public:
 	~Geometry();
 
 	virtual void init(ID3D10Device* device, D3DXCOLOR color = WHITE, D3D_PRIMITIVE_TOPOLOGY topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	virtual void init(ID3D10Device* device, std::string objFile, LPCWSTR texFile = L".\\textures\\grey.dds", bool comp = false, LPCWSTR specFile = L".\\textures\\defaultspec.dds");
+	virtual void init(ID3D10Device* device, std::string objFile, LPCWSTR texFile = L".\\textures\\grey.dds", LPCWSTR specFile = L".\\textures\\defaultspec.dds");
+	virtual void init(ID3D10Device* device, std::string objFile, TEXTURE* tex, TEXTURE* spec);
 	virtual void draw(UINT offset = 0);
 	
 	Vector3 getAABBMin(){return min;}
 	Vector3 getAABBMax(){return max;}
 
 	void setCustomAABB(Vector3 min, Vector3 max){this->min = min; this->max = max;}
+
+	void setTexture(ID3D10ShaderResourceView* tex){mDiffuseMapRV=tex;}
 
 	ID3D10ShaderResourceView* mDiffuseMapRV;
 	ID3D10ShaderResourceView* mSpecMapRV;
@@ -45,8 +48,6 @@ protected:
 	D3D10_RASTERIZER_DESC rasterState;
 
 	void calculateDefaultAABB(vector<Vector3>& verts);
-
-
 
 private:
 	D3D_PRIMITIVE_TOPOLOGY topology;

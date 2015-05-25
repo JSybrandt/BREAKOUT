@@ -56,7 +56,6 @@ void BREAKOUT::initApp()
 	buildFX();
 
 	threadComplete = false;
-	loadingStatus = 0;
 	loadingThread = CreateThread(0,0,threadFunct,this,0,0);
 
 	buildVertexLayouts();
@@ -75,41 +74,61 @@ void BREAKOUT::threadInit()
 
 	sky.init(md3dDevice, this, 5000.0f);
 
-	mCubeBlue.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\blue.png",true,L".\\textures\\white.png");
-	mCubeGreen.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\green.png",true,L".\\textures\\white.png");
-	mCubeOrange.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\orange.png",true,L".\\textures\\white.png");
-	mCubePurple.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\purple.png",true,L".\\textures\\white.png");
-	mCubeYellow.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\yellow.png",true,L".\\textures\\white.png");
-	mCubeRock.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\rock.png",true);
-	mCubeWhite.init(md3dDevice,".\\geometry\\cube.geo",L".\\textures\\white.png",true,L".\\textures\\white.png");
+	loadingStatus = L"Creating Textures";
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\blue.png", 0, 0, &tBlue, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\green.png", 0, 0, &tGreen, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\orange.png", 0, 0, &tOrange, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\purple.png", 0, 0, &tPurple, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\yellow.png", 0, 0, &tYellow, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\rock.png", 0, 0, &tRock, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\white.png", 0, 0, &tWhite, 0 ));
 
-	Geometry* b[] = {&mCubeBlue,&mCubeGreen,&mCubeOrange,&mCubePurple,&mCubeYellow};
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\white.png", 0, 0, &tSpec, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\defaultspec.dds", 0, 0, &tNonSpec, 0 ));
+
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\pFlip.png", 0, 0, &tPowFlip, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\pGrow.png", 0, 0, &tPowGrow, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\pShrink.png", 0, 0, &tPowShrink, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\pSpace.png", 0, 0, &tPowSpace, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\pSplit.png", 0, 0, &tPowSplit, 0 ));
+
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\paddle.png", 0, 0, &tPaddle, 0 ));
+	HR(D3DX10CreateShaderResourceViewFromFile(md3dDevice, L".\\textures\\enemy.png", 0, 0, &tEnemy, 0 ));
+
+	loadingStatus = L"Creating Models";
+	mCube.init(md3dDevice,".\\geometry\\cube.geo",tWhite,tNonSpec);
+	mPowerUp.init(md3dDevice,".\\geometry\\powerUp.geo",tPowFlip,tSpec);
+	mPaddle.init(md3dDevice,".\\geometry\\paddle.geo",tPaddle,tSpec);
+	mPlayerShip.init(md3dDevice,".\\geometry\\playerShip.geo",tPaddle,tSpec);
+	mEnemyShip.init(md3dDevice,".\\geometry\\enemyShip.geo",tEnemy,tSpec);
+	mSphere.init(md3dDevice,".\\geometry\\sphere.geo",tWhite,tSpec);
+
+
+	loadingStatus = L"Instantiating Objects";
+	TEXTURE* b[] = {tBlue,tGreen,tOrange,tPurple,tYellow};
 	for(int i=0; i<BRK::NUM_BLOCKS;i++)
 	{
-		blocks[i].init(this,b[i/15]);
+		blocks[i].init(this,&mCube,b[i/15]);
 		blocks[i].collisionType = AABBox;
 	}
 	for(int i = 0 ; i < BRK::NUM_WALLS; i++)
 	{
-		walls[i].init(this,&mCubeRock);
+		walls[i].init(this,&mCube,tRock);
 		walls[i].collisionType = AABBox;
 	}
-
 	for(int i = 0; i < BRK::NUM_POWER_UPS; i++)
 	{
-		powerUps[i].init(this,&mSphere,1,Vector3(1,0.5,0.5));
+		powerUps[i].init(this,&mPowerUp,tPowFlip,2,Vector3(1,1,1));
 	}
-
-	paddle.init(this,&mCubeWhite,1,PaddleNS::PADDLE_SCALE);
+	paddle.init(this,&mPaddle,&mPlayerShip);
 	paddle.collisionType = AABBox;
 	paddle.setPosition(BRK::PADDLE_START_POS);
-
-	mSphere.init(md3dDevice,".\\geometry\\sphere.geo",L".\\textures\\white.png",true,L".\\textures\\white.png");
+	enemyShip.init(this,&mEnemyShip,tEnemy, 2);
 	for(int i=0;i<BRK::NUM_BALLS;i++)
-		balls[i].init(this,&mSphere,0.5);
+		balls[i].init(this,&mSphere,tWhite,0.5);
 	
+	loadingStatus = L"Finishing";
 	camera.setGame(this);
-
 	buildVertexLayouts();
 	threadComplete = true;
 }
@@ -207,7 +226,7 @@ void BREAKOUT::levelsUpdate(float dt)
 	flipCooldown = max(0,flipCooldown-dt);
 	if(flipCooldown>0)
 	{
-		float x = (BRK::FLIP_TIME-flipCooldown)/BRK::FLIP_TIME;
+		float x = (PowerUpNS::FLIP_DURATION-flipCooldown)/PowerUpNS::FLIP_DURATION;
 		float percentChange = (-pow(2*x-1,20)+1);
 		float rot = PI*percentChange;
 		Vector3 newPos = cameraPos - camera.getLookAt();
@@ -223,9 +242,16 @@ void BREAKOUT::levelsUpdate(float dt)
 	paddle.update(dt);
 	for(int i=0;i<BRK::NUM_BALLS;i++)
 		balls[i].update(dt);
-
+	
 	collisions();
 
+	Vector3 rot = enemyShip.getRotation();
+	rot.y += PI*dt;
+	if(rot.y>2*PI)rot.y-=2*PI;
+	rot.z=sin(rot.y/2)/2;
+	enemyShip.setRotation(rot);
+	enemyShip.update(dt);
+	if(enemyShip.getPosition().x<-40)enemyShip.isActive=false;
 	for(int i = 0; i < BRK::NUM_POWER_UPS; i++)
 		powerUps[i].update(dt);
 }
@@ -242,7 +268,11 @@ void BREAKOUT::collisions()
 
 	for(int j=0;j<BRK::NUM_BALLS;j++)
 	{
-		if(balls[j].collided(&paddle)){
+		if(balls[j].collided(&enemyShip)){
+			balls[j].hitWall(&enemyShip);
+			enemyShip.isActive=false;
+		}
+		if(!paddle.isShip() && balls[j].collided(&paddle)){
 			balls[j].hitPaddle(&paddle);
 		}
 		for(int i = 0 ; i < BRK::NUM_WALLS; i++)
@@ -304,7 +334,7 @@ void BREAKOUT::drawScene()
 		r.top = r.bottom = mClientHeight*0.2;
 		mFont->DrawText(0,L"LOADING",-1,&r,DT_NOCLIP|DT_CENTER,WHITE);
 		r.top = r.bottom = mClientHeight*0.3;
-		mFont->DrawText(0,std::to_wstring(loadingStatus).c_str(),-1,&r,DT_NOCLIP|DT_CENTER,RED);
+		mFont->DrawText(0,loadingStatus.c_str(),-1,&r,DT_NOCLIP|DT_CENTER,RED);
 	}
 	else
 	{
@@ -390,6 +420,7 @@ void BREAKOUT::levelsDraw()
 	for(int i = 0; i < BRK::NUM_POWER_UPS; i++)
 		powerUps[i].draw(mfxWVPVar,mView,mProj,mTech);
 	paddle.draw(mfxWVPVar,mView,mProj,mTech);
+	enemyShip.draw(mfxWVPVar,mView,mProj,mTech);
 	for(int i=0;i<BRK::NUM_BALLS;i++)
 		balls[i].draw(mfxWVPVar,mView,mProj,mTech);
 }
@@ -486,6 +517,7 @@ void BREAKOUT::clearLevel()
 	for(int i = 0; i < BRK::NUM_POWER_UPS; i++)
 		powerUps[i].isActive = false;
 	paddle.isActive = false;
+	enemyShip.isActive=false;
 	for(int i=0;i<BRK::NUM_BALLS;i++)
 		balls[i].isActive = false;
 	flipCooldown = 0;
@@ -532,8 +564,7 @@ void BREAKOUT::loadLevel()
 {
 	state.level = GAME;
 	loadWalls();
-	paddle.isActive = true;
-	paddle.setPosition(BRK::PADDLE_START_POS);
+	paddle.create(BRK::PADDLE_START_POS);
 	spawnBall(BRK::BALL_START_POS,Vector3(0,BallNS::SPEED,0));
 	for(int i = 0 ; i < 75; i++)
 	{
@@ -551,8 +582,8 @@ void BREAKOUT::loadLevel()
 
 void BREAKOUT::loadWalls(){
 	walls[0].create(Vector3(16,21,0),Vector3(0,0,0),Vector3(32,1,1));
-	walls[1].create(Vector3(.5,10.25,0),Vector3(0,0,0),Vector3(1,20,1));
-	walls[2].create(Vector3(31.5,10.25,0),Vector3(0,0,0),Vector3(1,20,1));
+	walls[1].create(Vector3(.5,10.25,0),Vector3(0,0,0),Vector3(1,21,1));
+	walls[2].create(Vector3(31.5,10.25,0),Vector3(0,0,0),Vector3(1,21,1));
 };
 
 Light* BREAKOUT::spawnLight(Vector3 pos, int type) {
@@ -589,14 +620,17 @@ void BREAKOUT::checkGameState()
 		}
 	if(won)
 		loadSplashScreen(true);
-	bool lost = true;
-	for(int i = 0 ; i < BRK::NUM_BALLS; i++)
-		if(balls[i].isActive){
-			lost = false;
-			break;
-		}
-	if(lost)
-		loadSplashScreen(false);
+
+	if(!paddle.isShip()){
+		bool lost = true;
+		for(int i = 0 ; i < BRK::NUM_BALLS; i++)
+			if(balls[i].isActive){
+				lost = false;
+				break;
+			}
+		if(lost)
+			loadSplashScreen(false);
+	}
 }
 
 void BREAKOUT::doPowerUp(PowerUpType t)
@@ -618,7 +652,15 @@ void BREAKOUT::doPowerUp(PowerUpType t)
 	if(t==SHRINK)
 		paddle.shrink();
 	if(t==FLIP && flipCooldown == 0)
-		flipCooldown=BRK::FLIP_TIME;
+		flipCooldown=PowerUpNS::FLIP_DURATION;
+	if(t==SPACE_INVADERS)
+	{
+		paddle.enterSpaceMode();
+		if(!enemyShip.isActive){
+			enemyShip.create(Vector3(50,19,0));
+			enemyShip.setVelocity(Vector3(-5,0,0));
+		}
+	}
 		
 
 }
@@ -630,7 +672,28 @@ Powerup* BREAKOUT::spawnPowerUp(Vector3 pos, PowerUpType t)
 		if(!powerUps[i].isActive)
 		{
 			powerUps[i].create(pos,t);
-			powerUps[i].setScale(Vector3(1,0.5,0.5));
+			powerUps[i].setScale(Vector3(1,1,1));
+
+			switch (t)
+			{
+			case SPLIT:
+				powerUps[i].tex=tPowSplit;
+				break;
+			case FLIP:
+				powerUps[i].tex=tPowFlip;
+				break;
+			case GROW:
+				powerUps[i].tex=tPowGrow;
+				break;
+			case SHRINK:
+				powerUps[i].tex=tPowShrink;
+				break;
+			case SPACE_INVADERS:
+				powerUps[i].tex=tPowSpace;
+				break;
+			default:
+				break;
+			}
 			return &powerUps[i];
 		}
 	}

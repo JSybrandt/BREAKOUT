@@ -16,6 +16,7 @@ Actor::Actor()
 	health = MAX_HEALTH;
 	collisionType = SPHERE;
 	audioData3D = nullptr;
+	tex = nullptr;
 }
 
 Actor::~Actor()
@@ -27,6 +28,8 @@ void Actor::draw(ID3D10EffectMatrixVariable* fx, Matrix& camera, Matrix& project
 {
 	if (!isActive || !isVisible)
 		return;
+
+	if(tex!=nullptr)geometry->setTexture(tex);
 
     wvp = getWorldMatrix()*camera*projection;	
 	foo[0]=0;
@@ -52,9 +55,10 @@ void Actor::draw(ID3D10EffectMatrixVariable* fx, Matrix& camera, Matrix& project
     }
 }
 
-void Actor::init(BREAKOUT* game,Geometry *b, float r,  Vector3 s )
+void Actor::init(BREAKOUT* game,Geometry *b, TEXTURE* t, float r,  Vector3 s )
 {
 	this->game = game;
+	tex = t;
 	geometry = b;
 	radius = r;
 	position = Vector3(0,0,0);

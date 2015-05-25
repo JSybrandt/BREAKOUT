@@ -30,16 +30,14 @@ namespace BRK{
 
 	const int NUM_WALLS = 3;
 	const int NUM_POWER_UPS = 100;
-	const int NUM_BALLS = 10;
+	const int NUM_BALLS = 100;
 
 	const Vector3 PADDLE_START_POS(16,0.25,0);
 	const Vector3 BALL_START_POS(16,3,0);
 	const Vector3 LOOK_AT_DISP(0,10,0);
 
 	const float LOWEST_POINT = -5;
-
-	const float FLIP_TIME = 10;
-
+	
 	const float WIDTH = 32;
 };
 
@@ -138,16 +136,18 @@ private:
 	void buildFX();
 	void buildVertexLayouts();
 
-	int loadingStatus;
+	wstring loadingStatus;
 	HANDLE loadingThread;
 	bool threadComplete;
 
-	Geometry mCubeBlue,mCubeGreen,mCubeOrange,mCubePurple,mCubeYellow,mCubeRock,mCubeWhite, mSphere;
+	Geometry mCube, mSphere, mPaddle,mPlayerShip,mEnemyShip,mPowerUp;
+	TEXTURE* tBlue,*tGreen,*tOrange,*tPurple,*tYellow,*tRock,*tWhite,*tPowFlip,*tPowGrow,*tPowShrink,*tPowSpace,*tPowSplit, *tSpec, *tNonSpec,*tPaddle, *tEnemy;
 	Block blocks[BRK::NUM_BLOCKS];
 	Actor walls[BRK::NUM_WALLS];
 	Powerup powerUps[BRK::NUM_POWER_UPS]; 
 	Paddle paddle;
 	Ball balls[BRK::NUM_BALLS];
+	Actor enemyShip;
 
 	void loadWalls();
 

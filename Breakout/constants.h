@@ -16,6 +16,7 @@
 #define Normalize D3DXVec3Normalize
 #define Length D3DXVec3Length
 #define FAILED(hr) (((HRESULT)(hr)) < 0)
+#define TEXTURE ID3D10ShaderResourceView
 
 // WAVE_BANK must be location of .xwb file.
 const char WAVE_BANK[]  = "audio\\Win\\CMwavebank.xwb";

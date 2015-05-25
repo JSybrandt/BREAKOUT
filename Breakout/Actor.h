@@ -46,7 +46,7 @@ public:
 	Actor();
 	~Actor();
 
-	void init(BREAKOUT* game,Geometry *b, float r=1,  Vector3 scale = Vector3(1,1,1));
+	void init(BREAKOUT* game,Geometry *b,TEXTURE* t, float r=1,  Vector3 scale = Vector3(1,1,1));
 	virtual void draw(ID3D10EffectMatrixVariable* fx, Matrix& camera, Matrix& projection, ID3D10EffectTechnique* mTech);
 	virtual void update(float dt);
 
@@ -86,6 +86,8 @@ public:
 	//all params inout
 	void transformAABB(Vector3 & min, Vector3 & max);
 	
+	TEXTURE* tex;
+
 };
 
 
