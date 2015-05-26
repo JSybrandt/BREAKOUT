@@ -13,7 +13,8 @@ Camera::Camera()
 	farClippingPlane = FAR_CLIPPING_DIST;
 	up = Vector3(0.0f, 1.0f, 0.0f);
 	position = Vector3(0,0,0);
-
+	desiredLookAt =currentLookAt= Vector3(0,0,0);
+	uninit = false;
 }
 
 Camera::~Camera()
@@ -32,7 +33,17 @@ void Camera::setPerspective()
 void Camera::update(float dt)
 {
 	setPerspective();
-	Vector3 forward = position - lookAt;
+
+	Vector3 diff = desiredLookAt - currentLookAt;
+	if(Length(&diff)>0.05)
+	{
+		Normalize(&diff,&diff);
+		currentLookAt += diff*dt*4.5;
+	}
+	else
+		currentLookAt = desiredLookAt;
+
+	Vector3 forward = position - currentLookAt;
 	forward.y=0;
 
 	Vector3 right;
@@ -45,5 +56,5 @@ void Camera::update(float dt)
 	//game->audio->updateCamera(getPosition(),getDirection(),up,Vector3(0,0,0));
 	
 	//Generate new matrix
-	D3DXMatrixLookAtLH(&mView, &position, &lookAt, &up);
+	D3DXMatrixLookAtLH(&mView, &position, &currentLookAt, &up);
 }

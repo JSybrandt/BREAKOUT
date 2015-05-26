@@ -18,15 +18,17 @@ void Ball::hitBlock(Actor* a)
 		vel.y*=-1;
 	}
 	setVelocity(vel);
+	desiredSpeed = min(desiredSpeed+2,BallNS::MAX_SPEED);
 	setPosition(prevLoc);
 	blockCombo++;
 	
 }
 void Ball::hitPaddle(Actor* a)
 {	
-	Vector3 diff = getPosition()-a->getPosition();
+	Vector3 diff = getPosition()-a->getPosition()+Vector3(0,1,0);
 	Normalize(&diff,&diff);
-	setVelocity(diff*BallNS::SPEED);
+	setVelocity(diff);
+	desiredSpeed = BallNS::SPEED;
 	setPosition(prevLoc);
 	position.y = a->getPosition().y+a->getScale().y/2 + this->getScale().y/2;
 	
@@ -54,7 +56,10 @@ void Ball::hitWall(Actor* a)
 void Ball::update(float dt){
 	if(isActive){
 		prevLoc = getPosition();
+		Vector3 t = velocity;
+		velocity*=desiredSpeed;
 		Actor::update(dt);
+		velocity=t;
 		if(getPosition().y < BRK::LOWEST_POINT)
 			isActive = false;
 	}

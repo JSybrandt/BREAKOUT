@@ -102,7 +102,7 @@ void BREAKOUT::threadInit()
 	mPlayerShip.init(md3dDevice,".\\geometry\\playerShip.geo",tPaddle,tSpec);
 	mEnemyShip.init(md3dDevice,".\\geometry\\enemyShip.geo",tEnemy,tSpec);
 	mSphere.init(md3dDevice,".\\geometry\\sphere.geo",tWhite,tSpec);
-
+	mShard.init(md3dDevice,".\\geometry\\shard.geo",tWhite,tSpec);
 
 	loadingStatus = L"Instantiating Objects";
 	TEXTURE* b[] = {tBlue,tGreen,tOrange,tPurple,tYellow};
@@ -126,6 +126,8 @@ void BREAKOUT::threadInit()
 	enemyShip.init(this,&mEnemyShip,tEnemy, 2);
 	for(int i=0;i<BRK::NUM_BALLS;i++)
 		balls[i].init(this,&mSphere,tWhite,0.5);
+	for(int i=0;i<BRK::NUM_SCENERY;i++)
+		scenery[i].init(this,&mShard,tWhite);
 	
 	loadingStatus = L"Finishing";
 	camera.setGame(this);
@@ -215,14 +217,19 @@ void BREAKOUT::menuUpdate(float dt, bool reset)
 
 void BREAKOUT::levelsUpdate(float dt)
 {	
+
+	if(!hasStarted)
+	{
+		if(GetAsyncKeyState(VK_SPACE))
+		{
+			hasStarted=true;
+			startingBall->setDirection(Vector3(0,1,0));
+		}
+		
+	}
+
 	checkGameState();
 
-
-	camera.setLookAt(paddle.getPosition() + BRK::LOOK_AT_DISP);
-
-	cameraPos.x = ((paddle.getPosition().x/BRK::WIDTH)-0.5)*BRK::WIDTH/2+BRK::WIDTH/2; 
-
-	camera.setPosition(cameraPos);
 	flipCooldown = max(0,flipCooldown-dt);
 	if(flipCooldown>0)
 	{
@@ -239,10 +246,23 @@ void BREAKOUT::levelsUpdate(float dt)
 		blocks[i].update(dt);
 	for(int i = 0 ; i < BRK::NUM_WALLS; i++)
 		walls[i].update(dt);
+
 	paddle.update(dt);
+	Vector3 averagePos = (paddle.getPosition()+Vector3(0,7,0))*4;
+	int count = 4;
 	for(int i=0;i<BRK::NUM_BALLS;i++)
+	{
 		balls[i].update(dt);
-	
+		if(balls[i].isActive)
+		{
+			count++;
+			averagePos+=balls[i].getPosition();
+		}
+	}
+	camera.setLookAt(averagePos/count);
+	//camera.setLookAt(paddle.getPosition() + BRK::LOOK_AT_DISP);
+	cameraPos.x = ((paddle.getPosition().x/BRK::WIDTH)-0.5)*BRK::WIDTH/2+BRK::WIDTH/2; 
+	camera.setPosition(cameraPos);
 	collisions();
 
 	Vector3 rot = enemyShip.getRotation();
@@ -254,6 +274,16 @@ void BREAKOUT::levelsUpdate(float dt)
 	if(enemyShip.getPosition().x<-40)enemyShip.isActive=false;
 	for(int i = 0; i < BRK::NUM_POWER_UPS; i++)
 		powerUps[i].update(dt);
+	for(int i=0;i<BRK::NUM_SCENERY;i++)
+	{
+		if(scenery[i].isActive)
+		{
+			scenery[i].setRotation(scenery[i].getRotation()+Vector3(1,2,0)*dt);
+			scenery[i].update(dt);
+			if(Length(&scenery[i].getPosition())>CameraNS::FAR_CLIPPING_DIST)
+				scenery[i].isActive = false;
+		}
+	}
 }
 
 //COLLISIONS GIVE LOADS OF FALSE POSITIVES
@@ -423,6 +453,8 @@ void BREAKOUT::levelsDraw()
 	enemyShip.draw(mfxWVPVar,mView,mProj,mTech);
 	for(int i=0;i<BRK::NUM_BALLS;i++)
 		balls[i].draw(mfxWVPVar,mView,mProj,mTech);
+	for(int i=0;i<BRK::NUM_SCENERY;i++)
+		scenery[i].draw(mfxWVPVar,mView,mProj,mTech);
 }
 
 void BREAKOUT::buildFX()
@@ -520,7 +552,10 @@ void BREAKOUT::clearLevel()
 	enemyShip.isActive=false;
 	for(int i=0;i<BRK::NUM_BALLS;i++)
 		balls[i].isActive = false;
+	for(int i=0;i<BRK::NUM_SCENERY;i++)
+		scenery[i].isActive = false;
 	flipCooldown = 0;
+	hasStarted=false;
 }
 
 void BREAKOUT::loadSplashScreen(bool status)
@@ -565,7 +600,7 @@ void BREAKOUT::loadLevel()
 	state.level = GAME;
 	loadWalls();
 	paddle.create(BRK::PADDLE_START_POS);
-	spawnBall(BRK::BALL_START_POS,Vector3(0,BallNS::SPEED,0));
+	startingBall = spawnBall(BRK::BALL_START_POS, Vector3(0,0,0));
 	for(int i = 0 ; i < 75; i++)
 	{
 		blocks[i].create(Vector3((i%15)*2 + 2,(i/15)*1 + 12,0),BlockNS::BLOCK_SCALE);
@@ -575,9 +610,9 @@ void BREAKOUT::loadLevel()
 	l->att = Vector3(1,0,0);
 	l->ambient = D3DXCOLOR(1,1,1,1);
 
-	camera.setPosition(Vector3(16,10,-15));
-	cameraPos = Vector3(16,10,-15);
-	camera.setLookAt(Vector3(16,10,0));
+	camera.setPosition(Vector3(16,7,-15));
+	cameraPos = Vector3(16,7,-15);
+	camera.setLookAt(Vector3(16,7,0));
 }
 
 void BREAKOUT::loadWalls(){
@@ -619,7 +654,10 @@ void BREAKOUT::checkGameState()
 			break;
 		}
 	if(won)
+	{
 		loadSplashScreen(true);
+		return;
+	}
 
 	if(!paddle.isShip()){
 		bool lost = true;
@@ -629,7 +667,10 @@ void BREAKOUT::checkGameState()
 				break;
 			}
 		if(lost)
+		{
 			loadSplashScreen(false);
+			return;
+		}
 	}
 }
 
@@ -708,8 +749,26 @@ Ball* BREAKOUT::spawnBall(Vector3 pos, Vector3 vel)
 		if(!balls[i].isActive)
 		{
 			balls[i].create(pos);
-			balls[i].setVelocity(vel);
+			Normalize(&vel,&vel);
+			balls[i].setDirection(vel);
 			return &balls[i];
+		}
+	}
+	return nullptr;
+}
+
+
+Actor* BREAKOUT::spawnScenery(Vector3 pos, Vector3 vel, Geometry* geo, TEXTURE* tex)
+{
+	for(int i = 0 ; i < BRK::NUM_SCENERY; i++)
+	{
+		if(!scenery[i].isActive)
+		{
+			scenery[i].create(pos);
+			scenery[i].setVelocity(vel);
+			scenery[i].tex = tex;
+			scenery[i].setGeometry(geo);
+			return &scenery[i];
 		}
 	}
 	return nullptr;

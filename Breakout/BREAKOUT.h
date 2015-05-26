@@ -25,12 +25,13 @@ namespace BRK{
 	const int NUM_MENU_ITEMS = 6;//title, play, quit, "", instructions 1/2
 	const int NUM_SPLASH_MENU_ITEMS = 3;//title, continue, quit	
 
-	const int NUM_BLOCKS = 1000;
+	const int NUM_BLOCKS = 100;
 	
 
 	const int NUM_WALLS = 3;
 	const int NUM_POWER_UPS = 100;
 	const int NUM_BALLS = 100;
+	const int NUM_SCENERY = 1000;
 
 	const Vector3 PADDLE_START_POS(16,0.25,0);
 	const Vector3 BALL_START_POS(16,3,0);
@@ -94,6 +95,7 @@ public:
 
 	Powerup* spawnPowerUp(Vector3 pos, PowerUpType t);
 	Ball* spawnBall(Vector3 pos, Vector3 vel);
+	Actor* spawnScenery(Vector3 pos, Vector3 vel, Geometry* geo, TEXTURE* tex);
 
 	//TEXTURE RELATED ITEMS
 	ID3D10ShaderResourceView* mDiffuseMapRV;
@@ -132,6 +134,8 @@ public:
 	ID3D10EffectScalarVariable* mfxActiveLights;
 	ID3D10EffectScalarVariable* mfxLightType[MAX_LIGHTS];
 
+	Geometry mCube, mSphere, mPaddle,mPlayerShip,mEnemyShip,mPowerUp,mShard;
+
 private:
 	void buildFX();
 	void buildVertexLayouts();
@@ -140,7 +144,6 @@ private:
 	HANDLE loadingThread;
 	bool threadComplete;
 
-	Geometry mCube, mSphere, mPaddle,mPlayerShip,mEnemyShip,mPowerUp;
 	TEXTURE* tBlue,*tGreen,*tOrange,*tPurple,*tYellow,*tRock,*tWhite,*tPowFlip,*tPowGrow,*tPowShrink,*tPowSpace,*tPowSplit, *tSpec, *tNonSpec,*tPaddle, *tEnemy;
 	Block blocks[BRK::NUM_BLOCKS];
 	Actor walls[BRK::NUM_WALLS];
@@ -148,6 +151,7 @@ private:
 	Paddle paddle;
 	Ball balls[BRK::NUM_BALLS];
 	Actor enemyShip;
+	Actor scenery[BRK::NUM_SCENERY];
 
 	void loadWalls();
 
@@ -157,6 +161,9 @@ private:
 
 	float flipCooldown;
 	Vector3 cameraPos;
+
+	bool hasStarted;
+	Ball* startingBall;
 
 protected:
 

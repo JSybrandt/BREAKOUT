@@ -18,4 +18,6 @@ void Block::isHit(){
 		pow->drop();
 		pow=nullptr;
 	}
+	game->spawnScenery(position,Vector3(rand()%10-5,rand()%10-5,rand()%10-5)*3,&game->mShard,tex);
+	game->spawnScenery(position,Vector3(rand()%10-5,rand()%10-5,rand()%10-5)*3,&game->mShard,tex)->setRotation(Vector3(0,0,PI/2));
 }

@@ -1,8 +1,8 @@
-﻿Build started 5/24/2015 11:49:26 PM.
+﻿Build started 5/25/2015 11:38:22 PM.
      1>Project "F:\Projects\BREAKOUT\Breakout\CanisMajor.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Actor.cpp BREAKOUT.cpp Ball.cpp Block.cpp Camera.cpp Paddle.cpp Powerup.cpp Sky.cpp
-         Paddle.cpp
+         Ball.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : macro redefinition
                  c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49449) : see previous definition of 'DXGI_STATUS_OCCLUDED'
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : macro redefinition
@@ -160,6 +160,58 @@
      1>f:\projects\breakout\breakout\d3dutil.h(147): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>f:\projects\breakout\breakout\d3dutil.h(159): warning C4305: 'argument' : truncation from 'double' to 'FLOAT'
      1>f:\projects\breakout\breakout\block.h(8): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+         Paddle.cpp
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49449) : see previous definition of 'DXGI_STATUS_OCCLUDED'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49458) : see previous definition of 'DXGI_STATUS_CLIPPED'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49467) : see previous definition of 'DXGI_STATUS_NO_REDIRECTION'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49476) : see previous definition of 'DXGI_STATUS_NO_DESKTOP_ACCESS'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49485) : see previous definition of 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49494) : see previous definition of 'DXGI_STATUS_MODE_CHANGED'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49503) : see previous definition of 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49518) : see previous definition of 'DXGI_ERROR_INVALID_CALL'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49527) : see previous definition of 'DXGI_ERROR_NOT_FOUND'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49536) : see previous definition of 'DXGI_ERROR_MORE_DATA'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49545) : see previous definition of 'DXGI_ERROR_UNSUPPORTED'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49554) : see previous definition of 'DXGI_ERROR_DEVICE_REMOVED'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49563) : see previous definition of 'DXGI_ERROR_DEVICE_HUNG'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49573) : see previous definition of 'DXGI_ERROR_DEVICE_RESET'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49582) : see previous definition of 'DXGI_ERROR_WAS_STILL_DRAWING'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49592) : see previous definition of 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49601) : see previous definition of 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49611) : see previous definition of 'DXGI_ERROR_DRIVER_INTERNAL_ERROR'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49620) : see previous definition of 'DXGI_ERROR_NONEXCLUSIVE'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49629) : see previous definition of 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49639) : see previous definition of 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49648) : see previous definition of 'DXGI_ERROR_REMOTE_OUTOFMEMORY'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49793) : see previous definition of 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND' : macro redefinition
+                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49802) : see previous definition of 'D3D10_ERROR_FILE_NOT_FOUND'
+     1>f:\projects\breakout\breakout\d3dutil.h(147): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>f:\projects\breakout\breakout\d3dutil.h(159): warning C4305: 'argument' : truncation from 'double' to 'FLOAT'
+     1>f:\projects\breakout\breakout\block.h(8): warning C4305: 'initializing' : truncation from 'double' to 'const float'
          Camera.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : macro redefinition
                  c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49449) : see previous definition of 'DXGI_STATUS_OCCLUDED'
@@ -265,58 +317,8 @@
      1>f:\projects\breakout\breakout\d3dutil.h(147): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>f:\projects\breakout\breakout\d3dutil.h(159): warning C4305: 'argument' : truncation from 'double' to 'FLOAT'
      1>f:\projects\breakout\breakout\block.h(8): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-         Ball.cpp
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49449) : see previous definition of 'DXGI_STATUS_OCCLUDED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49458) : see previous definition of 'DXGI_STATUS_CLIPPED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49467) : see previous definition of 'DXGI_STATUS_NO_REDIRECTION'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49476) : see previous definition of 'DXGI_STATUS_NO_DESKTOP_ACCESS'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49485) : see previous definition of 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49494) : see previous definition of 'DXGI_STATUS_MODE_CHANGED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49503) : see previous definition of 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49518) : see previous definition of 'DXGI_ERROR_INVALID_CALL'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49527) : see previous definition of 'DXGI_ERROR_NOT_FOUND'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49536) : see previous definition of 'DXGI_ERROR_MORE_DATA'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49545) : see previous definition of 'DXGI_ERROR_UNSUPPORTED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49554) : see previous definition of 'DXGI_ERROR_DEVICE_REMOVED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49563) : see previous definition of 'DXGI_ERROR_DEVICE_HUNG'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49573) : see previous definition of 'DXGI_ERROR_DEVICE_RESET'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49582) : see previous definition of 'DXGI_ERROR_WAS_STILL_DRAWING'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49592) : see previous definition of 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49601) : see previous definition of 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49611) : see previous definition of 'DXGI_ERROR_DRIVER_INTERNAL_ERROR'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49620) : see previous definition of 'DXGI_ERROR_NONEXCLUSIVE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49629) : see previous definition of 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49639) : see previous definition of 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49648) : see previous definition of 'DXGI_ERROR_REMOTE_OUTOFMEMORY'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49793) : see previous definition of 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'
-     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND' : macro redefinition
-                 c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49802) : see previous definition of 'D3D10_ERROR_FILE_NOT_FOUND'
-     1>f:\projects\breakout\breakout\d3dutil.h(147): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>f:\projects\breakout\breakout\d3dutil.h(159): warning C4305: 'argument' : truncation from 'double' to 'FLOAT'
-     1>f:\projects\breakout\breakout\block.h(8): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>f:\projects\breakout\breakout\block.cpp(21): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
+     1>f:\projects\breakout\breakout\block.cpp(22): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
          BREAKOUT.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : macro redefinition
                  c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49449) : see previous definition of 'DXGI_STATUS_OCCLUDED'
@@ -369,19 +371,20 @@
      1>f:\projects\breakout\breakout\d3dutil.h(147): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>f:\projects\breakout\breakout\d3dutil.h(159): warning C4305: 'argument' : truncation from 'double' to 'FLOAT'
      1>f:\projects\breakout\breakout\block.h(8): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>f:\projects\breakout\breakout\breakout.cpp(223): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(333): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(334): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(336): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(262): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(264): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
      1>f:\projects\breakout\breakout\breakout.cpp(363): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
      1>f:\projects\breakout\breakout\breakout.cpp(364): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(369): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(370): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(386): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(387): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(392): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(366): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
      1>f:\projects\breakout\breakout\breakout.cpp(393): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
-     1>f:\projects\breakout\breakout\breakout.cpp(571): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(394): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(399): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(400): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(416): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(417): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(422): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(423): warning C4244: '=' : conversion from 'double' to 'LONG', possible loss of data
+     1>f:\projects\breakout\breakout\breakout.cpp(606): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
          Actor.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : macro redefinition
                  c:\program files (x86)\windows kits\8.0\include\shared\winerror.h(49449) : see previous definition of 'DXGI_STATUS_OCCLUDED'
@@ -458,4 +461,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:11.41
+Time Elapsed 00:00:11.33

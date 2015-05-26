@@ -34,8 +34,8 @@ public:
 
 	void setPosition(Vector3 pos) {position = pos;}
 	Vector3 getPosition() {return position;}
-	void setLookAt(Vector3 l){lookAt = l;}
-	Vector3 getLookAt(){return lookAt;}
+	void setLookAt(Vector3 l){if(!uninit){uninit=true;currentLookAt=l;}else desiredLookAt = l;}
+	Vector3 getLookAt(){return currentLookAt;}
 	float getSpeed () {return speed;}
 	void setSpeed(float s) {speed = s;}
 	float getFoV() {return FoV;}
@@ -48,7 +48,6 @@ private:
 	BREAKOUT * game;
 	Matrix mView;
 	Matrix mProj;
-	Vector3 lookAt;
 	float speed;
 	float aspectRatio;
 	float FoV;
@@ -57,6 +56,8 @@ private:
 	Vector3 up;
 	Vector3 right;
 	Vector3 position;
-
+	Vector3 currentLookAt;
+	Vector3 desiredLookAt;
+	bool uninit;
 };
 #endif
